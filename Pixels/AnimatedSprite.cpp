@@ -51,7 +51,7 @@ void AnimatedSprite::play(const Animation& animation)
 {
 	if (getAnimation() != &animation) {
 		setAnimation(animation);
-		m_isPaused = false;
+		//m_isPaused = false;
 	}
 		
 }

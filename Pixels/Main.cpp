@@ -26,21 +26,21 @@ int main(int argc, char* argv[])
 	listen.accept(tsock);
 	 ShowWindow(GetConsoleWindow(), SW_HIDE);  -- for release version (hide the console) must inc windows.h */
 	 //return 1 if connection not established
-	if (tsock.connect("127.0.0.1", 1337, sf::seconds(5.0f)) != sf::TcpSocket::Status::Done) return 1;
+	//if (tsock.connect("127.0.0.1", 1337, sf::seconds(5.0f)) != sf::TcpSocket::Status::Done) return 1;
 
 
-	// recieve packet, extract contents, set values accordingly
-	// todo: make a function to do all this crap
-	tsock.receive(packet);
-	std::cout << "Recieved packet from server. Packet size: " << sizeof(packet) << " bytes" << std::endl;
-	int op;
-	std::string path, file, playerImg;
-	packet >> op >> path >> file >> playerImg;
-	std::cout << "Extracted packet contents successfully." << std::endl;
-	std::cout << "Setting map data and player data accordingly." << std::endl;
-	tmx::MapLoader ml(path);
-	if (!ml.Load(file)) return 1;
-	if (!pTexture.loadFromFile(playerImg)) return 1;
+	//// recieve packet, extract contents, set values accordingly
+	//// todo: make a function to do all this crap
+	//tsock.receive(packet);
+	//std::cout << "Recieved packet from server. Packet size: " << sizeof(packet) << " bytes" << std::endl;
+	//int op;
+	//std::string path, file, playerImg;
+	//packet >> op >> path >> file >> playerImg;
+	//std::cout << "Extracted packet contents successfully." << std::endl;
+	//std::cout << "Setting map data and player data accordingly." << std::endl;
+	tmx::MapLoader ml("img\\towns\\littleroot");
+	if (!ml.Load("littleroot.tmx")) return 1;
+	if (!pTexture.loadFromFile("img\\player\\male2.png")) return 1;
 	//Sprite.setTexture(pTexture);
 	
 	

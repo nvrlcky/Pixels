@@ -1,7 +1,8 @@
 #include "Main.h"
 
-Player::Player(sf::Texture &texture)
-{
+Player::Player(sf::Texture &texture) : animatedSprite(sf::seconds(0.1f)) {
+
+	//animatedSprite(sf::seconds(0.2f));
 	// map animation to a spritesheet
 	walkingAnimation.setSpriteSheet(texture);
 	stillDown.setSpriteSheet(texture);
@@ -31,8 +32,8 @@ AnimatedSprite Player::update(sf::Event &event) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		//as.setAnimation(walkingAnimation);
 		animatedSprite.play(walkingAnimation);
-		animatedSprite.move(0, speed * delta);
-		//std::cout << speed * delta << std::endl;
+		animatedSprite.move(0.0f, speed * delta);
+		//std::cout << "hi" << std::endl; -- for some reason, this has to be uncommented to make the walkingAnimation work correctly.
 	}
 	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Down){
 		animatedSprite.setAnimation(stillDown);
