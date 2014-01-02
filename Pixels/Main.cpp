@@ -9,8 +9,6 @@ int main(int argc, char* argv[])
 	//window.setFramerateLimit(60);	//vba uses 20fps
 
 	// put these somewhere else eventually (player tings)
-	sf::Sprite Sprite;
-	sf::Vector2i dirOrigin;
 	sf::Clock clock;
 	sf::Texture	pTexture;
 	Player player(pTexture);
@@ -66,7 +64,7 @@ int main(int argc, char* argv[])
 				window.close();	
 		}
 		window.clear();
-		AnimatedSprite as = player.update(Sprite, event, dirOrigin);
+		AnimatedSprite as = player.update(event);
 		window.draw(ml);
 		window.draw(as);
 		//window.draw(Sprite);
