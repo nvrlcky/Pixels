@@ -9,7 +9,7 @@ Player::Player(sf::Texture &texture)
 	// walking frames
 	walkingAnimation.addFrame(sf::IntRect(32, 0, 32, 32));
 	walkingAnimation.addFrame(sf::IntRect(64, 0, 32, 32));
-	// standing still (UP) frame
+	// standing still (down) frame
 	stillDown.addFrame(sf::IntRect(0, 0, 32, 32));
 
 	// face up by default and start at (0,0)
@@ -28,8 +28,7 @@ AnimatedSprite Player::update(sf::Sprite &sprite, sf::Event &event, sf::Vector2i
 	float speed = 45.0f; // 45px per second
 	float delta = clock.restart().asSeconds();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		//as.setAnimation(walkingAnimation);
 		as.play(walkingAnimation);
 		as.move(0, speed * delta);
