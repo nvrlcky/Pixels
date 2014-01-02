@@ -32,6 +32,7 @@ AnimatedSprite Player::update(sf::Event &event) {
 		//as.setAnimation(walkingAnimation);
 		animatedSprite.play(walkingAnimation);
 		animatedSprite.move(0, speed * delta);
+		//std::cout << speed * delta << std::endl;
 	}
 	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Down){
 		animatedSprite.setAnimation(stillDown);

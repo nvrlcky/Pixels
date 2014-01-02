@@ -17,7 +17,6 @@ int main(int argc, char* argv[])
 	sf::Packet packet;
 	// networking
 	sf::TcpSocket tsock;
-	sf::Time timeout = sf::seconds(5.0f);
 	//Networking nt;
 
 
@@ -27,7 +26,7 @@ int main(int argc, char* argv[])
 	listen.accept(tsock);
 	 ShowWindow(GetConsoleWindow(), SW_HIDE);  -- for release version (hide the console) must inc windows.h */
 	 //return 1 if connection not established
-	if (tsock.connect("127.0.0.1", 1337, timeout) != sf::TcpSocket::Status::Done) return 1;
+	if (tsock.connect("127.0.0.1", 1337, sf::seconds(5.0f)) != sf::TcpSocket::Status::Done) return 1;
 
 
 	// recieve packet, extract contents, set values accordingly
@@ -48,9 +47,6 @@ int main(int argc, char* argv[])
 	
 	
 
-	 // elapsed time in seconds
-	//sf::Clock clockAs;
-//	sf::Event event;
 	// game loop
 	while (window.isOpen())
 	{
@@ -68,7 +64,6 @@ int main(int argc, char* argv[])
 		window.draw(ml);
 		window.draw(as);
 		//window.draw(Sprite);
-
 		window.display();
 
 	}
