@@ -9,11 +9,11 @@ int main(int argc, char* argv[])
 	//window.setFramerateLimit(60);	//vba uses 20fps
 
 	// put these somewhere else eventually (player tings)
-	PlayerMovement pm;
 	sf::Sprite Sprite;
 	sf::Vector2i dirOrigin;
 	sf::Clock clock;
 	sf::Texture	pTexture;
+	Player player(pTexture);
 	/*if (!pTexture.loadFromFile("img\\player\\male2.png"))
 		return 2;*/
 	sf::Packet packet;
@@ -48,23 +48,11 @@ int main(int argc, char* argv[])
 	
 	
 	
-	Animation walkingAnimation;
-	Animation stillDown;
-	walkingAnimation.setSpriteSheet(pTexture);
-	stillDown.setSpriteSheet(pTexture);
-	//walkingAnimation.addFrame(sf::IntRect(0, 0, 32, 32));
-	walkingAnimation.addFrame(sf::IntRect(32, 0, 32, 32));
-	walkingAnimation.addFrame(sf::IntRect(64, 0, 32, 32));
-	stillDown.addFrame(sf::IntRect(0, 0, 32, 32));
-
-	AnimatedSprite as(sf::seconds(0.5));
-	as.setAnimation(stillDown);
-	as.pause();
-	as.setPosition(0, 0);
+	
 
 	 // elapsed time in seconds
-	sf::Clock clockAs;
-	sf::Event event;
+	//sf::Clock clockAs;
+//	sf::Event event;
 	// game loop
 	while (window.isOpen())
 	{
@@ -77,28 +65,12 @@ int main(int argc, char* argv[])
 			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
 				window.close();	
 		}
-		float speed = 45.0f; // 45px per second
-		float delta = clock.restart().asSeconds();
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			//as.setAnimation(walkingAnimation);
-			//as.play(walkingAnimation);
-			as.play(walkingAnimation);
-			as.move(0, speed * delta);
-
-		}
-		if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Down){
-			as.setAnimation(stillDown);
-			//as.pause();
-		}
-		as.update(clockAs.restart());
-		//pm.initMovement(Sprite, pTexture, clock, dirOrigin);
-
-		
-		//window.draw(Sprite);
 		window.clear();
+		AnimatedSprite as = player.update(Sprite, event, dirOrigin);
 		window.draw(ml);
 		window.draw(as);
+		//window.draw(Sprite);
+
 		window.display();
 
 	}

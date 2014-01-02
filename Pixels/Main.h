@@ -7,5 +7,5 @@
 // game headers
 #include "AnimatedSprite.hpp"
 #include "Animation.hpp"
-#include "PlayerMovement.h"
+#include "Player.h"
 #include "Networking.h"
