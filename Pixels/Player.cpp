@@ -1,6 +1,6 @@
 #include "Main.h"
 
-Player::Player(sf::Texture &texture) : animatedSprite(sf::seconds(0.1f)) {
+Player::Player(sf::Texture &texture) : animatedSprite(sf::seconds(0.6f)) {
 
 	//animatedSprite(sf::seconds(0.2f));
 	// map animation to a spritesheet
@@ -25,20 +25,35 @@ Player::~Player()
 {
 }
 
-AnimatedSprite Player::update(sf::Event &event) {
-	float speed = 45.0f; // 45px per second
-	float delta = clock.restart().asSeconds();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		//as.setAnimation(walkingAnimation);
-		animatedSprite.play(walkingAnimation);
-		animatedSprite.move(0.0f, speed * delta);
-		//std::cout << "hi" << std::endl; -- for some reason, this has to be uncommented to make the walkingAnimation work correctly.
-	}
-	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Down){
-		animatedSprite.setAnimation(stillDown);
-		//as.pause();
-	}
+AnimatedSprite Player::getSprite() {
 	animatedSprite.update(clock.restart());
 	return animatedSprite;
+}
+
+void Player::setDirection(Direction direction) {
+	float speed = 45.0f; // 100px per second
+	float delta = dirClock.restart().asSeconds();
+	switch (direction)
+	{
+	case Player::Down:
+		animatedSprite.play(walkingAnimation);
+		animatedSprite.move(0.0f, speed * delta);
+		std::cout << speed * delta << std::endl;
+		break;
+	case Player::Up:
+		animatedSprite.play(walkingAnimation);
+		animatedSprite.move(0.0f, -speed * delta);
+		break;
+	case Player::Right:
+		animatedSprite.play(walkingAnimation);
+		animatedSprite.move(speed * delta, 0.0f);
+		break;
+	case Player::Left:
+		animatedSprite.play(walkingAnimation);
+		animatedSprite.move(-speed * delta, 0.0f);
+		break;
+	default:
+		break;
+	}
+
 }

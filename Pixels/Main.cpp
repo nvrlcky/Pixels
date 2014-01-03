@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 	// put these somewhere else eventually (player tings)
 	sf::Clock clock;
 	sf::Texture	pTexture;
-	Player player(pTexture);
+	
 	/*if (!pTexture.loadFromFile("img\\player\\male2.png"))
 		return 2;*/
 	sf::Packet packet;
@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
 	/*sf::TcpListener listen;
 	listen.listen(tsock.AnyPort);
 	listen.accept(tsock);
-	 ShowWindow(GetConsoleWindow(), SW_HIDE);  -- for release version (hide the console) must inc windows.h */
-	 //return 1 if connection not established
+	ShowWindow(GetConsoleWindow(), SW_HIDE);  -- for release version (hide the console) must inc windows.h */
+	//return 1 if connection not established
 	//if (tsock.connect("127.0.0.1", 1337, sf::seconds(5.0f)) != sf::TcpSocket::Status::Done) return 1;
 
 
@@ -41,28 +41,47 @@ int main(int argc, char* argv[])
 	tmx::MapLoader ml("img\\towns\\littleroot");
 	if (!ml.Load("littleroot.tmx")) return 1;
 	if (!pTexture.loadFromFile("img\\player\\male2.png")) return 1;
+	Player player(pTexture);
 	//Sprite.setTexture(pTexture);
-	
-	
-	
-	
 
 	// game loop
-	while (window.isOpen())
-	{
+	while (window.isOpen()) {
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
+		while (window.pollEvent(event)) {
 			// close window
-			if (event.type == sf::Event::Closed)
+			switch (event.type) {
+			case sf::Event::Closed:
 				window.close();
-			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
-				window.close();	
+				break;
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case sf::Keyboard::Down:
+					//player.setDirection(player.Down);
+					break;
+				case sf::Keyboard::Up:
+					//player.setDirection(player.Up);
+					break;
+				case sf::Keyboard::Right:
+					//player.setDirection(player.Right);
+					break;
+				case sf::Keyboard::Left:
+					//player.setDirection(player.Left);
+					break;
+				}
+				break;
+			}
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			player.setDirection(player.Down);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			player.setDirection(player.Up);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			player.setDirection(player.Left);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			player.setDirection(player.Right);
 		window.clear();
-		AnimatedSprite as = player.update(event);
 		window.draw(ml);
-		window.draw(as);
+		window.draw(player.getSprite());
 		//window.draw(Sprite);
 		window.display();
 

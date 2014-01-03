@@ -3,18 +3,20 @@
 class Player
 {
 public:
+	
 	Player(sf::Texture &texture);
 	~Player();
 	Animation walkingAnimation;
 	Animation stillDown;
 	AnimatedSprite animatedSprite;
-	sf::Clock clock;
+	sf::Clock clock, dirClock;
 	sf::Vector2i dirOrigin;
-	AnimatedSprite update(sf::Event &event);
+	enum Direction { Down, Up, Right, Left };
+	void setDirection(Direction);
+	AnimatedSprite getSprite();
+
 
 private:
-	enum Direction { Down = 0, Up = 96, Right = 192, Left = 288 };
+
+	
 };
-
-
-
