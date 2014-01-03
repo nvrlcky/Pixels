@@ -14,6 +14,7 @@ public:
 	enum Direction { Down, Up, Right, Left };
 	void setDirection(Direction);
 	AnimatedSprite getSprite();
+	float delta;
 
 
 private:

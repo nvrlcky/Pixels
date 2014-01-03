@@ -46,6 +46,16 @@ int main(int argc, char* argv[])
 
 	// game loop
 	while (window.isOpen()) {
+		player.delta = player.dirClock.restart().asSeconds();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			player.setDirection(player.Down);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			player.setDirection(player.Up);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			player.setDirection(player.Left);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			player.setDirection(player.Right);
+
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			// close window
@@ -71,14 +81,7 @@ int main(int argc, char* argv[])
 				break;
 			}
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			player.setDirection(player.Down);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			player.setDirection(player.Up);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			player.setDirection(player.Left);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			player.setDirection(player.Right);
+
 		window.clear();
 		window.draw(ml);
 		window.draw(player.getSprite());

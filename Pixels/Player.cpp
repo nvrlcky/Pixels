@@ -31,8 +31,8 @@ AnimatedSprite Player::getSprite() {
 }
 
 void Player::setDirection(Direction direction) {
-	float speed = 45.0f; // 100px per second
-	float delta = dirClock.restart().asSeconds();
+	float speed = 45.0f;
+	
 	switch (direction)
 	{
 	case Player::Down:
