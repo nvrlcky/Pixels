@@ -48,13 +48,13 @@ int main(int argc, char* argv[])
 	while (window.isOpen()) {
 		player.delta = player.dirClock.restart().asSeconds();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			player.setDirection(player.Down);
+			player.move(player.Down);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			player.setDirection(player.Up);
+			player.move(player.Up);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			player.setDirection(player.Left);
+			player.move(player.Left);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			player.setDirection(player.Right);
+			player.move(player.Right);
 
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -66,16 +66,16 @@ int main(int argc, char* argv[])
 			case sf::Event::KeyReleased:
 				switch (event.key.code) {
 				case sf::Keyboard::Down:
-					//player.setDirection(player.Down);
+					player.standStill(player.Down);
 					break;
 				case sf::Keyboard::Up:
-					//player.setDirection(player.Up);
+					player.standStill(player.Up);
 					break;
 				case sf::Keyboard::Right:
-					//player.setDirection(player.Right);
+					player.standStill(player.Right);
 					break;
 				case sf::Keyboard::Left:
-					//player.setDirection(player.Left);
+					player.standStill(player.Left);
 					break;
 				}
 				break;
